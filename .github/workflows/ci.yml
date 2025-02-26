@@ -5,40 +5,54 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
-      - name: Install dependencies
+      - name: Cache Python Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Dependencies
         run: |
           python -m venv venv
-          echo "VIRTUAL ENVIRONMENT CREATED"
-          python -m pip install --upgrade pip
-          echo "PIP UPGRADED"
-          python -m pip install -r requirements.txt
-          echo "INSTALLED DEPENDENCIES"
-          python -m pip install pylint bandit pytest
-          echo "INSTALLED ADDITIONAL TOOLS"
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint bandit pytest
 
-      - name: Run code quality checks
+      - name: Run Code Quality Checks (Pylint)
         run: |
-          python -m pylint $(git ls-files '*.py')
+          source venv/bin/activate
+          python -m pylint --recursive=y --ignore=venv,tests --jobs=4 $(git ls-files '*.py')
 
-      - name: Run security checks
+      - name: Run Security Checks (Bandit)
         run: |
-          python -m bandit -r .
+          source venv/bin/activate
+          bandit -r model_pipeline.py main.py
 
-      - name: Run tests
+      - name: Run Unit Tests (Pytest)
         run: |
-          python -m pytest tests/
+          source venv/bin/activate
+          pytest tests/
+
+      - name: Clean Up
+        run: |
+          rm -rf venv
 
