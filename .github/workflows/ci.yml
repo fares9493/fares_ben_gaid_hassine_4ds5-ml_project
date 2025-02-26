@@ -1,0 +1,46 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint bandit pytest
+
+      - name: Code Quality Check (Pylint)
+        run: |
+          source venv/bin/activate
+          pylint --exit-zero $(git ls-files '*.py')
+
+      - name: Security Check (Bandit)
+        run: |
+          source venv/bin/activate
+          bandit -r $(git ls-files '*.py')
+
+      - name: Run Tests (Pytest)
+        run: |
+          source venv/bin/activate
+          pytest tests/
+
