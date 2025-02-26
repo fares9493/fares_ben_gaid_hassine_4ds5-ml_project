@@ -9,11 +9,11 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -21,23 +21,26 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
+      - name: Install System Dependencies
+        run: sudo apt-get update && sudo apt-get install -y python3-venv
+
+      - name: Set up Python Virtual Environment
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint bandit pytest
 
-      - name: Code Quality Check (Pylint)
+      - name: Run Code Quality Checks (Pylint)
         run: |
           source venv/bin/activate
-          pylint --exit-zero $(git ls-files '*.py')
+          pylint $(git ls-files '*.py')
 
-      - name: Security Check (Bandit)
+      - name: Run Security Checks (Bandit)
         run: |
           source venv/bin/activate
-          bandit -r $(git ls-files '*.py')
+          bandit -r .
 
       - name: Run Tests (Pytest)
         run: |
