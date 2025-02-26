@@ -29,30 +29,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install Dependencies
+      - name: Install Dependencies (Without Virtual Env)
         run: |
-          python -m venv venv
-          source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint bandit pytest
 
       - name: Run Code Quality Checks (Pylint)
         run: |
-          source venv/bin/activate
-          python -m pylint --recursive=y --ignore=venv,tests --jobs=4 $(git ls-files '*.py')
+          python -m pylint --recursive=y --ignore=tests --jobs=4 $(git ls-files '*.py')
 
       - name: Run Security Checks (Bandit)
         run: |
-          source venv/bin/activate
           bandit -r model_pipeline.py main.py
 
       - name: Run Unit Tests (Pytest)
         run: |
-          source venv/bin/activate
           pytest tests/
 
-      - name: Clean Up
-        run: |
-          rm -rf venv
 
