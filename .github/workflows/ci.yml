@@ -5,26 +5,21 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Install System Dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3-venv
-
-      - name: Set up Python Virtual Environment
+      - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -32,17 +27,17 @@ jobs:
           pip install -r requirements.txt
           pip install pylint bandit pytest
 
-      - name: Run Code Quality Checks (Pylint)
+      - name: Run code quality checks
         run: |
           source venv/bin/activate
           pylint $(git ls-files '*.py')
 
-      - name: Run Security Checks (Bandit)
+      - name: Run security checks
         run: |
           source venv/bin/activate
           bandit -r .
 
-      - name: Run Tests (Pytest)
+      - name: Run tests
         run: |
           source venv/bin/activate
           pytest tests/
