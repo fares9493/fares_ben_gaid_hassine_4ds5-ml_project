@@ -1,0 +1,2 @@
+venv/lib/python3.12/site-packages/pyarrow/libarrow.so.1900 filter=lfs diff=lfs merge=lfs -text
+mlops_env/lib/python3.12/site-packages/pyarrow/libarrow.so.1801 filter=lfs diff=lfs merge=lfs -text
