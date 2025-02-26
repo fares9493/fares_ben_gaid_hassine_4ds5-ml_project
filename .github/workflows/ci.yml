@@ -21,7 +21,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Set up Python Virtual Environment
+      - name: Remove Existing Virtual Environment (if any)
+        run: rm -rf venv
+
+      - name: Create and Activate Virtual Environment
         run: |
           python -m venv venv
           source venv/bin/activate || . venv/bin/activate
