@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/6bc44f1ffc6c43f787c6a96853184b89/artifacts
+end_time: 1738983163867
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6bc44f1ffc6c43f787c6a96853184b89
+run_name: crawling-moth-115
+run_uuid: 6bc44f1ffc6c43f787c6a96853184b89
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738983162992
+status: 4
+tags: []
+user_id: fares

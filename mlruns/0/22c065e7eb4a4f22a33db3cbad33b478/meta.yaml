@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/22c065e7eb4a4f22a33db3cbad33b478/artifacts
+end_time: 1738983466659
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 22c065e7eb4a4f22a33db3cbad33b478
+run_name: funny-deer-294
+run_uuid: 22c065e7eb4a4f22a33db3cbad33b478
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738983461825
+status: 4
+tags: []
+user_id: fares

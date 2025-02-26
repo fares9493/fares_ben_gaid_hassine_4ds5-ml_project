@@ -1,0 +1,45 @@
+# Makefile for automating ML project tasks
+
+# Définition des variables
+VENV = venv
+PYTHON = $(VENV)/bin/python
+REQS = requirements.txt
+
+# Cible par défaut
+.PHONY: all
+all: install verify prepare train test
+
+# Installer les dépendances
+.PHONY: install
+install:
+	python3 -m venv $(VENV)
+	$(PYTHON) -m pip install --upgrade pip
+	$(PYTHON) -m pip install -r $(REQS)
+
+# Vérifier la qualité du code (formatage, linting, sécurité)
+.PHONY: verify
+verify:
+	$(PYTHON) -m black .
+	$(PYTHON) -m pylint --disable=C,R model_pipeline.py
+	$(PYTHON) -m bandit -r .
+
+# Préparer les données
+.PHONY: prepare
+prepare:
+	$(PYTHON) model_pipeline.py --prepare
+
+# Entraîner le modèle
+.PHONY: train
+train:
+	$(PYTHON) model_pipeline.py --train
+
+# Exécuter les tests
+.PHONY: test
+test:
+	$(PYTHON) -m pytest tests/
+
+# Nettoyer les fichiers générés
+.PHONY: clean
+clean:
+	rm -rf $(VENV)
+	rm -f model.pkl scaler.pkl pca.pkl

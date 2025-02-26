@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/321540c59f774cf28f6b43777b7b820e/artifacts
+end_time: 1738983806709
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 321540c59f774cf28f6b43777b7b820e
+run_name: thundering-bee-710
+run_uuid: 321540c59f774cf28f6b43777b7b820e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738983802546
+status: 3
+tags: []
+user_id: fares

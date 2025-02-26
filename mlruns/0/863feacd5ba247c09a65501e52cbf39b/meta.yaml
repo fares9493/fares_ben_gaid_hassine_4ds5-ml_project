@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/863feacd5ba247c09a65501e52cbf39b/artifacts
+end_time: 1738983543260
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 863feacd5ba247c09a65501e52cbf39b
+run_name: peaceful-calf-575
+run_uuid: 863feacd5ba247c09a65501e52cbf39b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738983539263
+status: 4
+tags: []
+user_id: fares

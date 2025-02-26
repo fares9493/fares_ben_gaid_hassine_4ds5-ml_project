@@ -1,0 +1,29 @@
+import requests
+
+url = "http://127.0.0.1:8000/predict"
+
+data = {
+    "Account_Length": 1,
+    "Area_Code": 2,
+    "Customer_Service_Calls": 3,
+    "International_Plan": 4,
+    "Number_of_Voicemail_Messages": 5,
+    "Total_Day_Calls": 6,
+    "Total_Day_Charge": 7.0,
+    "Total_Day_Minutes": 8.0,
+    "Total_Night_Calls": 9,
+    "Total_Night_Charge": 10.0,
+    "Total_Night_Minutes": 11.0,
+    "Total_Evening_Calls": 12,
+    "Total_Evening_Charge": 13.0,
+    "Total_Evening_Minutes": 14.0,
+    "International_Calls": 15,
+    "Voicemail_Plan": 16,
+    "Extra_Feature_1": 17.0,
+    "Extra_Feature_2": 18.0,
+    "Extra_Feature_3": 19.0,
+}
+
+response = requests.post(url, json=data)
+
+print("Response:", response.json())
