@@ -13,37 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🛎️ Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
-      - name: 📦 Install Dependencies
+      - name: Set up Python Virtual Environment
         run: |
           python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
+          source venv/bin/activate || . venv/bin/activate
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint bandit pytest
 
-      - name: 🛠 Run Code Quality Checks (Pylint)
+      - name: Run Code Quality Checks (Pylint)
         run: |
-          source venv/bin/activate
-          python -m pylint --disable=C0114,C0116,C0411,C0413,C0103,W0611 $(git ls-files '*.py')
+          source venv/bin/activate || . venv/bin/activate
+          pylint model_pipeline.py main.py tests/test_pipeline.py --disable=C0114,C0103,C0411,C0413,W0611
 
-      - name: 🔍 Run Security Checks (Bandit)
+      - name: Run Security Checks (Bandit)
         run: |
-          source venv/bin/activate
-          bandit -r model_pipeline.py main.py
+          source venv/bin/activate || . venv/bin/activate
+          bandit -r model_pipeline.py main.py tests/test_pipeline.py
 
-      - name: 🧪 Run Tests (Pytest)
+      - name: Run Unit Tests (Pytest)
         run: |
-          source venv/bin/activate
+          source venv/bin/activate || . venv/bin/activate
           pytest tests/
-
-      - name: ✅ CI Pipeline Completed
-        run: echo "🎉 All checks passed!"
 
