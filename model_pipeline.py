@@ -1,3 +1,8 @@
+"""
+This module contains the machine learning pipeline for data preparation,
+model training, and evaluation.
+"""
+
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split

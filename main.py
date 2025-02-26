@@ -1,9 +1,13 @@
+"""
+This module provides the main CLI entry point for the ML pipeline.
+It includes functions to prepare data, train a model, and evaluate it.
+"""
+import os
 import argparse
 import joblib
 import mlflow
 import mlflow.sklearn
 import numpy as np
-import os
 from model_pipeline import (
     prepare_data,
     train_model,
