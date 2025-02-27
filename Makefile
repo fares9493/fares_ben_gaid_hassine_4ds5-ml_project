@@ -5,7 +5,7 @@ REQUIREMENTS=requirements.txt
 SOURCE_DIR=model_pipeline.py
 MAIN_SCRIPT=main.py
 TEST_DIR=tests/
-
+ 
 # Configuration de l'environnement
 setup:
 	@echo "🔧 Création de l'environnement virtuel et installation des dépendances..."
