@@ -14,3 +14,4 @@ black
 pytest
 pylint
 imbalanced-learn
+bandit

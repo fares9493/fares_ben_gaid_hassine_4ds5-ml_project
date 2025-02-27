@@ -2,7 +2,10 @@
 This module provides the main CLI entry point for the ML pipeline.
 It includes functions to prepare data, train a model, and evaluate it.
 """
+
 import os
+import sys
+
 import argparse
 import joblib
 import mlflow
@@ -26,6 +29,11 @@ os.makedirs(ARTIFACTS_DIR, exist_ok=True)  # Ensure directory exists
 
 
 def main():
+    """
+    Main function to execute the ML pipeline.
+    This handles data preparation, training, and evaluation.
+    """
+
     parser = argparse.ArgumentParser(description="ML Pipeline CLI")
     parser.add_argument("--prepare", action="store_true", help="Préparer les données")
     parser.add_argument("--train", action="store_true", help="Entraîner le modèle")

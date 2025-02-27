@@ -1,0 +1,9 @@
+[MESSAGES CONTROL]
+disable=
+    C0114,  # Missing module docstring
+    C0116,  # Missing function or method docstring
+    C0411,  # Wrong import order
+    C0413,  # Wrong import position
+    C0103,  # Invalid variable name (X_train, etc.)
+    W0611   # Unused import
+
